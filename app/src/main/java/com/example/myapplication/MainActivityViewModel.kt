@@ -10,6 +10,7 @@ class MainActivityViewModel : ViewModel() {
     fun likeEmployee(position: Int) {
         employees.value = employees.value?.toMutableList()?.apply {
             (filter { it.id == position }).forEach { it.isLiked = !it.isLiked }
+
         }
     }
 }
