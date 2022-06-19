@@ -1,7 +1,7 @@
 package com.example.myapplication
 
 data class Employee(
-    val id: Long,
+    val id: Int,
     val fullName: String,
     val city: String,
     var isLiked: Boolean = false,

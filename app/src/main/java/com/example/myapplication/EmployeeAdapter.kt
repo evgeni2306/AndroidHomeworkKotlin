@@ -11,13 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 class EmployeeAdapter(
-    private val clickedLike: (Int) -> Unit
-) :
-    RecyclerView.Adapter<EmployeeAdapter.EmployeeViewHolder>() {
+    private val clickedLike: (Int) -> Unit) : RecyclerView.Adapter<EmployeeAdapter.EmployeeViewHolder>() {
 
     private val employees = mutableListOf<Employee>()
 
-    inner class EmployeeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+     class EmployeeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val employeeCard: ConstraintLayout = itemView.findViewById(R.id.employees_list_item)
         val fullNameTextView: TextView = itemView.findViewById(R.id.full_name)
         val likeButton: ImageView = itemView.findViewById(R.id.like_button)
@@ -34,10 +32,9 @@ class EmployeeAdapter(
         with(holder) {
             fullNameTextView.text = employee.fullName
             likeButton.visibility = if (employee.isLiked) View.VISIBLE else View.INVISIBLE
-
             employeeCard.setOnClickListener {
-                clickedLike(position)
-                likeButton.visibility = if (employee.isLiked) View.VISIBLE else View.INVISIBLE
+                employee.isLiked = !employee.isLiked
+                notifyItemChanged(holder.layoutPosition)
             }
         }
     }

@@ -8,6 +8,8 @@ class MainActivityViewModel : ViewModel() {
     val employees = MutableLiveData(Employee.getMockEmployees())
 
     fun likeEmployee(position: Int) {
-        employees.value?.get(position)?.isLiked = !(employees.value?.get(position)?.isLiked)!!
+        employees.value = employees.value?.toMutableList()?.apply {
+            (filter { it.id == position }).forEach { it.isLiked = !it.isLiked }
+        }
     }
 }
