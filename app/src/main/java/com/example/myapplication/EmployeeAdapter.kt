@@ -34,6 +34,7 @@ class EmployeeAdapter(
             likeButton.visibility = if (employee.isLiked) View.VISIBLE else View.INVISIBLE
             employeeCard.setOnClickListener {
                 clickedLike(position)
+                val elem = employee.copy(isLiked = !employee.isLiked);
             }
         }
     }
@@ -45,9 +46,9 @@ class EmployeeAdapter(
     fun reload(data: List<Employee>) {
         val diffUtil = EmployeesDiffUtilCallback(employees, data)
         val result = DiffUtil.calculateDiff(diffUtil)
-        if(diffUtil.oldListSize == diffUtil.newListSize){
-            data.forEach{notifyItemChanged(it.id)}
-        }
+//        if(diffUtil.oldListSize == diffUtil.newListSize){
+//            data.forEach{notifyItemChanged(it.id)}
+//        }
         employees.clear()
         employees.addAll(data)
         result.dispatchUpdatesTo(this)
